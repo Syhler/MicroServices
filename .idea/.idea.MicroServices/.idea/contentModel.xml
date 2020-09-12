@@ -436,9 +436,12 @@
         <e p="appsettings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="Controllers" t="Include">
-          <e p="Email.cs" t="Include" />
+          <e p="EmailController.cs" t="Include" />
         </e>
         <e p="EmailService.csproj" t="IncludeRecursive" />
+        <e p="Models" t="Include">
+          <e p="EmailViewModel.cs" t="Include" />
+        </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">

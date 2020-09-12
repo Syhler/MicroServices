@@ -4,6 +4,7 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthModule, LogLevel, OidcConfigService} from "angular-auth-oidc-client";
+import {HttpClientModule} from "@angular/common/http";
 
 
 export function configureAuth(odicConfigService :   OidcConfigService) : Function
@@ -30,7 +31,8 @@ export function configureAuth(odicConfigService :   OidcConfigService) : Functio
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AuthModule.forRoot()
+    AuthModule.forRoot(),
+    HttpClientModule
   ],
   providers: [
     OidcConfigService,
