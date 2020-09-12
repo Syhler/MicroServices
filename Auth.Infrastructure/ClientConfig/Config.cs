@@ -41,16 +41,16 @@ namespace Auth.Infrastructure.ClientConfig
                 new Client
                 {
                     ClientId = "angular_client",
-                    ClientSecrets = {new Secret("client.secret".ToSha256())},
                     AllowedScopes = {"openid", "profile", "emailService"},
                     RequireConsent = false,
-                    RedirectUris = {"https://localhost:4200"},
-                    PostLogoutRedirectUris = {"https://localhost:4200"},
+                    RedirectUris = {"http://localhost:4200"},
+                    PostLogoutRedirectUris = {"http://localhost:4200"},
                     AllowOfflineAccess = true,
                     AllowAccessTokensViaBrowser = true,
-                    AllowedCorsOrigins = {"https://localhost:4200"},
+                    AllowedCorsOrigins = {"http://localhost:4200"},
                     AllowedGrantTypes = GrantTypes.Code,
-                    RequirePkce = true
+                    RequirePkce = true,
+                    RequireClientSecret = false
                 }
             };
         }

@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AuthServer.Controllers
 {
-    public class AuthController : Controller
+    public class AccountController : Controller
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
 
-        public AuthController(SignInManager<ApplicationUser> signInManager)
+        public AccountController(SignInManager<ApplicationUser> signInManager)
         {
             _signInManager = signInManager;
         }

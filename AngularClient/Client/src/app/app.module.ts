@@ -6,9 +6,9 @@ import {AppComponent} from './app.component';
 import {AuthModule, LogLevel, OidcConfigService} from "angular-auth-oidc-client";
 
 
-export function configureAuth(odicConfigService :   OidcConfigService) : Promise<any>
+export function configureAuth(odicConfigService :   OidcConfigService) : Function
 {
-  return odicConfigService.withConfig(
+  return () => odicConfigService.withConfig(
     {
       stsServer: "https://localhost:5000",
       redirectUrl: window.location.origin,
