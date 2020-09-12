@@ -227,6 +227,13 @@
             <e p="ApplicationRole.cs" t="Include" />
             <e p="ApplicationUser.cs" t="Include" />
           </e>
+          <e p="Migrations" t="Include">
+            <e p="AppDbContext" t="Include">
+              <e p="20200912150436_InitialCommit.cs" t="Include" />
+              <e p="20200912150436_InitialCommit.Designer.cs" t="Include" />
+              <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
+            </e>
+          </e>
         </e>
         <e p="DependencyInjection.cs" t="Include" />
         <e p="obj" t="ExcludeRecursive">
@@ -247,6 +254,7 @@
           <e p="AuthController.cs" t="Include" />
           <e p="HomeController.cs" t="Include" />
         </e>
+        <e p="DbCommands.txt" t="Include" />
         <e p="Models" t="Include">
           <e p="LoginViewModel.cs" t="Include" />
         </e>

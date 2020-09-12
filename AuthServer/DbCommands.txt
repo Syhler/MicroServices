@@ -1,0 +1,6 @@
+﻿
+
+dotnet ef migrations add InitialCommit -c ApplicationDbContext -o Data/Migrations/AppDbContext --project Auth.Infrastructure --startup-project AuthServer
+
+
+dotnet ef database update -c ApplicationDbContext --project Auth.Infrastructure --startup-project AuthServer

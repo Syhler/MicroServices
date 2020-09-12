@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Auth.Infrastructure;
+using Auth.Infrastructure.Data.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,14 +29,18 @@ namespace AuthServer
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthInfrasontext(_configuration);
-
+     
+            
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "Authentication.Cookie";
                 config.LoginPath = "/Auth/Login";
                 config.LogoutPath = "/Auth/Logout";
             });
+            services.AddAuthInfrastructure(_configuration);
+            
+
+           
             services.AddControllersWithViews();
         }
 
@@ -45,10 +52,13 @@ namespace AuthServer
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseStaticFiles();
+            
             app.UseRouting();
             
             app.UseIdentityServer();
+            
+            app.UseStaticFiles();
+
 
             app.UseEndpoints(endpoints =>
             {

@@ -9,9 +9,8 @@ namespace Auth.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static void AddAuthInfrasontext(this IServiceCollection services, IConfiguration configuration )
+        public static void AddAuthInfrastructure(this IServiceCollection services, IConfiguration configuration )
         {
-            
             
             services.AddDbContext<ApplicationDbContext>(builder =>
             {
@@ -19,12 +18,12 @@ namespace Auth.Infrastructure
             });
 
             services.AddIdentity<ApplicationUser, ApplicationRole>(config =>
-            {
-                config.Password.RequiredLength = 4;
-                config.Password.RequireDigit = true;
-                config.Password.RequireUppercase = false;
-                config.Password.RequireNonAlphanumeric = false;
-            })
+                {
+                    config.Password.RequiredLength = 4;
+                    config.Password.RequireDigit = true;
+                    config.Password.RequireUppercase = false;
+                    config.Password.RequireNonAlphanumeric = false;
+                })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
