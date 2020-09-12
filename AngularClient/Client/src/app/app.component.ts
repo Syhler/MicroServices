@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {OidcSecurityService} from "angular-auth-oidc-client";
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,21 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Client';
+
+  constructor(public oidcSecurityService: OidcSecurityService)
+  {
+    this.oidcSecurityService.checkAuth().subscribe((auth) => {console.log("Is Authenticated " + auth)})
+  }
+
+  signIn(): void {
+    this.oidcSecurityService.authorize()
+  }
+
+  sendEmail(): void {
+
+  }
+
+
 }
+
+

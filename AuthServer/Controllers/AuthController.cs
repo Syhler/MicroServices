@@ -1,29 +1,47 @@
 ﻿using System;
+using System.Threading.Tasks;
+using Auth.Infrastructure.Data.Identity;
+using AuthServer.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AuthServer.Controllers
 {
     public class AuthController : Controller
     {
+        private readonly SignInManager<ApplicationUser> _signInManager;
+
+        public AuthController(SignInManager<ApplicationUser> signInManager)
+        {
+            _signInManager = signInManager;
+        }
+
         // GET
         [HttpGet]
-        public IActionResult Login()
+        public IActionResult Login(string returnUrl)
         {
-            return View();
+            return View(new LoginViewModel{ReturnUrl = returnUrl});
         }
 
         [HttpPost]
-        public IActionResult Login(string returnUrl, string button)
+        public async Task<IActionResult> Login(LoginViewModel model, string button)
         {
             //check return url safety thingy
             
             
             if (button == "submit")
             {
-                
+                var result =
+                    await _signInManager.PasswordSignInAsync(model.Username, model.Password, 
+                        model.IsPersistence, false);
+
+                if (result.Succeeded)
+                {
+                    return Redirect(model.ReturnUrl);
+                }
             }
 
-            return Redirect(returnUrl);
+            return View();
         }
 
         
