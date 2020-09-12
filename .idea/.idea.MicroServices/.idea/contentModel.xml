@@ -256,6 +256,7 @@
         </e>
         <e p="DbCommands.txt" t="Include" />
         <e p="Models" t="Include">
+          <e p="ErrorModel.cs" t="Include" />
           <e p="LoginViewModel.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
@@ -278,11 +279,13 @@
             <e p="Login.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
+            <e p="Error.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
           </e>
         </e>
         <e p="wwwroot" t="Include">
           <e p="css" t="Include">
+            <e p="error-page.css" t="Include" />
             <e p="main.css" t="Include" />
             <e p="util.css" t="Include" />
           </e>
@@ -383,6 +386,7 @@
             <e p="img-01.png" t="Include" />
           </e>
           <e p="js" t="Include">
+            <e p="error-page.js" t="Include" />
             <e p="main.js" t="Include" />
           </e>
           <e p="vendor" t="Include">

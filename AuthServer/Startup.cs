@@ -22,18 +22,18 @@ namespace AuthServer
         public void ConfigureServices(IServiceCollection services)
         {
      
-            
+            services.AddAuthInfrastructure(_configuration);
+
             services.ConfigureApplicationCookie(config =>
             {
                 config.Cookie.Name = "Authentication.Cookie";
                 config.LoginPath = "/account/Login";
                 config.LogoutPath = "/account/Logout";
             });
-            services.AddAuthInfrastructure(_configuration);
             
-
            
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddRazorRuntimeCompilation();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
