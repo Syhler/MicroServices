@@ -258,6 +258,7 @@
         <e p="Models" t="Include">
           <e p="ErrorModel.cs" t="Include" />
           <e p="LoginViewModel.cs" t="Include" />
+          <e p="RegisterViewModel.cs" t="Include" />
         </e>
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
@@ -277,10 +278,14 @@
           <e p="_ViewImports.cshtml" t="Include" />
           <e p="Account" t="Include">
             <e p="Login.cshtml" t="Include" />
+            <e p="Register.cshtml" t="Include" />
           </e>
           <e p="Home" t="Include">
             <e p="Error.cshtml" t="Include" />
             <e p="Index.cshtml" t="Include" />
+          </e>
+          <e p="Shared" t="Include">
+            <e p="_Layout.cshtml" t="Include" />
           </e>
         </e>
         <e p="wwwroot" t="Include">

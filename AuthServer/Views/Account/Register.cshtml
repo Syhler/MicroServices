@@ -1,0 +1,108 @@
+﻿@model AuthServer.Models.RegisterViewModel
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "_Layout";
+}
+
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-register100">
+            @*
+            <div class="login100-pic js-tilt" data-tilt>
+                <img src="~/images/img-01.png" alt="IMG">
+            </div>
+*@
+
+            <form class="validate-form" asp-action="Register" asp-controller="Account">
+                <span class="login100-form-title">
+                    Member Registration
+                </span>
+
+                
+                <div class="wrap-input100 mb-4">
+                    <div class="row">
+                        <div class="col-6 validate-input" data-validate="First Name is required">
+                            <input class="input100" type="text" placeholder="First Name" asp-for="@Model.FirstName" name="firstname"  tabindex="1">
+                            <span class="focus-input90"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>    
+                            </span>
+                        </div>
+                
+                        <div class="col-6 validate-input" data-validate="Last Name is required">
+                            <input class="input100" type="text" placeholder="Last Name" asp-for="@Model.LastName" name="lastname" tabindex="10">
+                            <span class="focus-input90"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrap-input100 mb-4">
+                    <div class="row">
+                        <div class="col-6 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                            <input class="input100" type="text" placeholder="Email" name="email"  asp-for="@Model.Email" tabindex="11" id="email">
+                            <span class="focus-input90"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="col-6 validate-input" data-validate="Email doesnt match">
+                            <input class="input100" type="text" placeholder="Confirm Email" asp-for="@Model.ConfirmEmail" name="confirmEmail" tabindex="20">
+                            <span class="focus-input90"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="wrap-input100">
+                    <div class="row">
+                        <div class="col-6 validate-input" data-validate="Password is required">
+                            <input class="input100" type="password" placeholder="Password" name="password" asp-for="@Model.Password" tabindex="21" id="password">
+                            <span class="focus-input90"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+                        </div>
+
+                        <div class="col-6 validate-input" data-validate="Password doesnt match">
+                            <input class="input100" type="password" placeholder="Confirm Password" asp-for="@Model.ConfirmPassword" name="confirmPassword" tabindex="30">
+                            <span class="focus-input90"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="login100-form-btn" type="submit" name="button" value="submit">
+                        Regsiter
+                    </button>
+                </div>
+
+                <div class="container-login100-form-btn">
+                    <button class="cancel100-form-btn" type="submit" name="button" value="cancel">
+                        Cancel
+                    </button>
+                </div>
+
+
+                <div class="text-center p-t-136">
+                    <a class="txt2" asp-action="Login" asp-controller="Account">
+                        Already have account - Login
+                        <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

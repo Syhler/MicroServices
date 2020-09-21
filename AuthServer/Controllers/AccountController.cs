@@ -2,11 +2,9 @@
 using System.Threading.Tasks;
 using Auth.Infrastructure.Data.Identity;
 using AuthServer.Models;
-using IdentityServer4.Models;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace AuthServer.Controllers
 {
@@ -74,10 +72,23 @@ namespace AuthServer.Controllers
 
         //register from clients
         
+        [HttpGet]
         public IActionResult Register()
         {
+            return View(new RegisterViewModel());
+        }
+
+        [HttpPost]
+        public IActionResult Register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                
+            }
+
             return Ok();
         }
+        
         
         
         [HttpGet]
