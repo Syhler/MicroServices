@@ -21,6 +21,8 @@ namespace AuthServer.Controllers
             _interaction = interaction;
 
             _registrationRepository = registrationRepository;
+            
+            //TODO LOOK INTO Serilog FOR LOGGING - BOTH FILE AND DATABASE - STRUCTURED LOGGING | MAYBE USE NOSQL FOR LOGGING
         }
 
         // GET
@@ -67,7 +69,7 @@ namespace AuthServer.Controllers
 
             if (string.IsNullOrWhiteSpace(logoutRequest.PostLogoutRedirectUri))
             {
-                return RedirectToAction(""); //Return to error page
+                return RedirectToAction("Error","Home"); //Return to error page
             }
             
             return Redirect(logoutRequest.PostLogoutRedirectUri);
