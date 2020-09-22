@@ -20,6 +20,8 @@ namespace AuthServer
 
             using (var scope = host.Services.CreateScope())
             {
+                //TODO SEED DATABASE ANOTHER PLACE
+                
                 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<ApplicationUser>>();
                 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<ApplicationRole>>();
 
@@ -31,12 +33,12 @@ namespace AuthServer
 
                 userManager.CreateAsync(user, "password123").GetAwaiter().GetResult();
 
-                var adminRole = new ApplicationRole("Admin");
-                var regularRole = new ApplicationRole("Regular");
+                var adminRole = new ApplicationRole(Roles.Admin.ToString());
+                var regularRole = new ApplicationRole(Roles.Regular.ToString());
                 roleManager.CreateAsync(adminRole).GetAwaiter().GetResult();
                 roleManager.CreateAsync(regularRole).GetAwaiter().GetResult();
 
-                userManager.AddToRoleAsync(user, "Admin");
+                userManager.AddToRoleAsync(user, Roles.Admin.ToString());
 
             }
 

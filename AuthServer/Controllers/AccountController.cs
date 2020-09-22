@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Auth.Infrastructure.Data.Identity;
 using AuthServer.Models;
+using AuthServer.Repositories;
 using IdentityServer4.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -12,11 +13,14 @@ namespace AuthServer.Controllers
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IIdentityServerInteractionService _interaction;
-        
-        public AccountController(SignInManager<ApplicationUser> signInManager, IIdentityServerInteractionService interaction)
+        private readonly IRegistrationRepository _registrationRepository;
+        public AccountController(SignInManager<ApplicationUser> signInManager, IIdentityServerInteractionService interaction,
+            IRegistrationRepository registrationRepository)
         {
             _signInManager = signInManager;
             _interaction = interaction;
+
+            _registrationRepository = registrationRepository;
         }
 
         // GET
@@ -79,14 +83,19 @@ namespace AuthServer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Register(RegisterViewModel model)
+        public async Task<IActionResult> Register(RegisterViewModel model)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid) return View(model);
+            
+            var succeeded = await _registrationRepository.RegisterUser(model);
+
+            if (succeeded)
             {
-                
+                //redirect to client
+                return RedirectToAction("Index", "Home");
             }
 
-            return Ok();
+            return View(model);
         }
         
         

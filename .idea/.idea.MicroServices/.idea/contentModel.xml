@@ -175,6 +175,9 @@
           <e p="node_modules\webdriver-js-extender" t="IncludeRecursive" />
           <e p="node_modules\yn" t="IncludeRecursive" />
           <e p="node_modules\zone.js" t="IncludeRecursive" />
+          <e p="obj" t="Include">
+            <e p="Auth.Infrastructure.EntityFrameworkCore.targets" t="Include" />
+          </e>
           <e p="package-lock.json" t="Include" />
           <e p="package.json" t="Include" />
           <e p="README.md" t="Include" />
@@ -226,11 +229,14 @@
             <e p="ApplicationDbContext.cs" t="Include" />
             <e p="ApplicationRole.cs" t="Include" />
             <e p="ApplicationUser.cs" t="Include" />
+            <e p="Roles.cs" t="Include" />
           </e>
           <e p="Migrations" t="Include">
             <e p="AppDbContext" t="Include">
               <e p="20200912150436_InitialCommit.cs" t="Include" />
               <e p="20200912150436_InitialCommit.Designer.cs" t="Include" />
+              <e p="20200922095211_updatedApplicationUser.cs" t="Include" />
+              <e p="20200922095211_updatedApplicationUser.Designer.cs" t="Include" />
               <e p="ApplicationDbContextModelSnapshot.cs" t="Include" />
             </e>
           </e>
@@ -271,6 +277,10 @@
         <e p="Program.cs" t="Include" />
         <e p="Properties" t="Include">
           <e p="launchSettings.json" t="Include" />
+        </e>
+        <e p="Repositories" t="Include">
+          <e p="IRegistrationRepository.cs" t="Include" />
+          <e p="RegistrationRepository.cs" t="Include" />
         </e>
         <e p="Startup.cs" t="Include" />
         <e p="tempkey.jwk" t="Include" />

@@ -1,4 +1,8 @@
-﻿using AuthServer.Models;
+﻿using System.Collections.Generic;
+using System.Linq;
+using Auth.Infrastructure.Data.Identity;
+using AuthServer.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 
@@ -8,18 +12,20 @@ namespace AuthServer.Controllers
     {
         
         private readonly IConfiguration _configuration;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public HomeController(IConfiguration configuration)
+        public HomeController(IConfiguration configuration, UserManager<ApplicationUser> userManager)
         {
             _configuration = configuration;
+            _userManager = userManager;
         }
 
 
         // GET
-        public IActionResult Index()
+        public List<ApplicationUser> Index()
         {
             //redirect to main page - get it from appsettings
-            return View();
+            return _userManager.Users.ToList();
         }
 
         public IActionResult Error()

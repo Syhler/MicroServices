@@ -1,4 +1,5 @@
 using Auth.Infrastructure;
+using AuthServer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,8 +31,11 @@ namespace AuthServer
                 config.LoginPath = "/account/Login";
                 config.LogoutPath = "/account/Logout";
             });
+
+
+            services.AddTransient<IRegistrationRepository, RegistrationRepository>();
+
             
-           
             services.AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
         }
