@@ -25,6 +25,8 @@ export class AppComponent {
   sendEmail(): void {
     const token = this.oidcSecurityService.getToken();
 
+    console.log(token)
+
     const httpOptions = {
       headers: new HttpHeaders({
         Authorization: 'Bearer ' + token

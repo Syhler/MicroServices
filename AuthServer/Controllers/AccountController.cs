@@ -36,7 +36,7 @@ namespace AuthServer.Controllers
         public async Task<IActionResult> Login(LoginViewModel model, string button)
         {
             //check return url safety thingy
-            if (!ModelState.IsValid) return View(model.ReturnUrl);
+            if (!ModelState.IsValid) return RedirectToAction("Login", "Account", routeValues: model.ReturnUrl);
 
             var validReturnUrl = _interaction.IsValidReturnUrl(model.ReturnUrl);
 
@@ -45,7 +45,7 @@ namespace AuthServer.Controllers
             if (button == "submit")
             {
                 var result =
-                    await _signInManager.PasswordSignInAsync(model.Username, model.Password, 
+                    await _signInManager.PasswordSignInAsync(model.Email, model.Password, 
                         model.IsPersistence, false);
 
                 if (result.Succeeded)

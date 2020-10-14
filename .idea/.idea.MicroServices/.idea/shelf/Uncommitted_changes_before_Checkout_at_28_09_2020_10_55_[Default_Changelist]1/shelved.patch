@@ -1,0 +1,62 @@
+Index: AuthServer/Startup.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Auth.Infrastructure;\r\nusing Microsoft.AspNetCore.Builder;\r\nusing Microsoft.AspNetCore.Hosting;\r\nusing Microsoft.Extensions.Configuration;\r\nusing Microsoft.Extensions.DependencyInjection;\r\nusing Microsoft.Extensions.Hosting;\r\n\r\nnamespace AuthServer\r\n{\r\n    public class Startup\r\n    {\r\n\r\n        private readonly IConfiguration _configuration;\r\n\r\n        public Startup(IConfiguration configuration)\r\n        {\r\n            _configuration = configuration;\r\n        }\r\n\r\n        // This method gets called by the runtime. Use this method to add services to the container.\r\n        // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940\r\n        public void ConfigureServices(IServiceCollection services)\r\n        {\r\n     \r\n            \r\n            services.ConfigureApplicationCookie(config =>\r\n            {\r\n                config.Cookie.Name = \"Authentication.Cookie\";\r\n                config.LoginPath = \"/account/Login\";\r\n                config.LogoutPath = \"/account/Logout\";\r\n            });\r\n            services.AddAuthInfrastructure(_configuration);\r\n            \r\n\r\n           \r\n            services.AddControllersWithViews();\r\n        }\r\n\r\n        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.\r\n        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)\r\n        {\r\n            if (env.IsDevelopment())\r\n            {\r\n                app.UseDeveloperExceptionPage();\r\n            }\r\n\r\n            app.UseStaticFiles();\r\n\r\n            app.UseRouting();\r\n            \r\n            app.UseIdentityServer();\r\n            \r\n            app.UseEndpoints(endpoints =>\r\n            {\r\n                endpoints.MapDefaultControllerRoute();\r\n            });\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- AuthServer/Startup.cs	(revision 8f611859dc9dad1f89fad38b67c60fc32e95aeac)
++++ AuthServer/Startup.cs	(date 1601242343895)
+@@ -44,6 +44,8 @@
+                 app.UseDeveloperExceptionPage();
+             }
+ 
++            app.UseHttpsRedirection();
++            
+             app.UseStaticFiles();
+ 
+             app.UseRouting();
+Index: Auth.Infrastructure/Data/Identity/ApplicationUser.cs
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>using Microsoft.AspNetCore.Identity;\r\n\r\nnamespace Auth.Infrastructure.Data.Identity\r\n{\r\n    public class ApplicationUser : IdentityUser\r\n    {\r\n        public string FirstName { get; set; }\r\n        public string MiddleName { get; set; }\r\n        public string LastName { get; set; }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Auth.Infrastructure/Data/Identity/ApplicationUser.cs	(revision 8f611859dc9dad1f89fad38b67c60fc32e95aeac)
++++ Auth.Infrastructure/Data/Identity/ApplicationUser.cs	(date 1601240794040)
+@@ -5,7 +5,6 @@
+     public class ApplicationUser : IdentityUser
+     {
+         public string FirstName { get; set; }
+-        public string MiddleName { get; set; }
+         public string LastName { get; set; }
+     }
+ }
+\ No newline at end of file
+Index: AngularClient/Client/src/app/app.component.ts
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import {Component} from '@angular/core';\r\nimport {OidcSecurityService} from \"angular-auth-oidc-client\";\r\nimport {HttpClient, HttpHeaders} from \"@angular/common/http\";\r\n\r\n@Component({\r\n  selector: 'app-root',\r\n  templateUrl: './app.component.html',\r\n  styleUrls: ['./app.component.css']\r\n})\r\nexport class AppComponent {\r\n  title = 'Client';\r\n\r\n  constructor(public oidcSecurityService: OidcSecurityService, public http: HttpClient) {\r\n    this.oidcSecurityService.checkAuth().subscribe((auth) => {\r\n      console.log(\"Is Authenticated \" + auth)\r\n    })\r\n  }\r\n\r\n  signIn(): void {\r\n    this.oidcSecurityService.authorize()\r\n  }\r\n\r\n\r\n\r\n  sendEmail(): void {\r\n    const token = this.oidcSecurityService.getToken();\r\n\r\n    const httpOptions = {\r\n      headers: new HttpHeaders({\r\n        Authorization: 'Bearer ' + token\r\n      })\r\n    };\r\n\r\n\r\n    const body = new FormData();\r\n    body.append('Email', 'morten.syhler@gmail.com');\r\n    body.append('Message', 'Hey med dig');\r\n\r\n    this.http.post(\r\n      \"https://localhost:5050/email/send\",\r\n      body, httpOptions).subscribe(x => console.log(x))\r\n\r\n  }\r\n\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- AngularClient/Client/src/app/app.component.ts	(revision 8f611859dc9dad1f89fad38b67c60fc32e95aeac)
++++ AngularClient/Client/src/app/app.component.ts	(date 1601241229344)
+@@ -25,12 +25,16 @@
+   sendEmail(): void {
+     const token = this.oidcSecurityService.getToken();
+ 
++    console.log(token)
++
+     const httpOptions = {
+       headers: new HttpHeaders({
+         Authorization: 'Bearer ' + token
+       })
+     };
+ 
++    this.http.get("http://localhost:3000", httpOptions).subscribe(x => console.log(x))
++
+ 
+     const body = new FormData();
+     body.append('Email', 'morten.syhler@gmail.com');

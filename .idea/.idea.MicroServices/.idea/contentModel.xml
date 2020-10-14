@@ -189,6 +189,7 @@
               <e p="app.component.spec.ts" t="Include" />
               <e p="app.component.ts" t="Include" />
               <e p="app.module.ts" t="Include" />
+              <e p="AuthInterceptor.ts" t="Include" />
             </e>
             <e p="assets" t="Include">
               <e p=".gitkeep" t="Include" />

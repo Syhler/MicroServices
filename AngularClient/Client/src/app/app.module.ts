@@ -4,7 +4,9 @@ import {APP_INITIALIZER, NgModule} from '@angular/core';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {AuthModule, LogLevel, OidcConfigService} from "angular-auth-oidc-client";
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
+import { AuthInterceptor } from "./AuthInterceptor";
+
 
 
 export function configureAuth(odicConfigService :   OidcConfigService) : Function
@@ -41,6 +43,11 @@ export function configureAuth(odicConfigService :   OidcConfigService) : Functio
       useFactory: configureAuth,
       deps: [OidcConfigService],
       multi: true
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
     }
   ],
   bootstrap: [AppComponent]

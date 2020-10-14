@@ -21,7 +21,8 @@ namespace Auth.Infrastructure.ClientConfig
             {
                 new ApiResource("emailService")
                 {
-                    Scopes = new List<string>{"emailService"}
+                    Scopes = new List<string>{"emailService"},
+                    ApiSecrets = {new Secret("secret".Sha256())}
                 }
             };
         }
@@ -50,7 +51,8 @@ namespace Auth.Infrastructure.ClientConfig
                     AllowedCorsOrigins = {"http://localhost:4200"},
                     AllowedGrantTypes = GrantTypes.Code,
                     RequirePkce = true,
-                    RequireClientSecret = false
+                    RequireClientSecret = false,
+                    ClientSecrets = new List<Secret>{new Secret("john".ToSha256())}
                 }
             };
         }
